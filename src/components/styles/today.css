@@ -1,9 +1,16 @@
 #today-main-div{
     position: absolute;
-    left: 5%;
-top: 5%;
-    width: 400px;
-    height: 100px;
-    border:2px solid rgb(34, 217, 220);
+    width:300px;
+    height: 500px;
+    border:2px solid rgb(34, 220, 112);
     border-radius:8px;
+    padding: 10px;
+}
+
+#today-text{
+    width:100%;
+    margin: 10px;
+    color:rgb(60, 68, 64);
+    font-size: 30px;
+    text-align: center;
 }

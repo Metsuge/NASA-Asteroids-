@@ -1,9 +1,4 @@
 #nextAprroach-main-div{
-    position: absolute;
-    left: 5%;
-    top: 25%;
-    width: 400px;
-    height: 100px;
-    border:2px solid rgb(34, 217, 220);
-    border-radius:8px;
+    top: 37%;
+    width: inherit;
 }

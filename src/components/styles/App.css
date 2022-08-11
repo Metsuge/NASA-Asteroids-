@@ -2,9 +2,10 @@
   margin: 0 auto;
 }
 #main-app-div{
-  position: absolute;
+  /* position: absolute; */
   width:600px;
   height: 600px;
   border:2px solid rgb(34, 217, 220);
   border-radius:8px;
+  margin: 0 auto;
 }
