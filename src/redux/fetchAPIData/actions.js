@@ -26,3 +26,10 @@ export const setStartEndDates = (dates) => {
     payload: dates,
   };
 };
+
+export const combineObjectArrays = (array) => {
+  return {
+    type: actionTypes.COMBINE_OBJECT_ARRAYS,
+    payload: array,
+  };
+};

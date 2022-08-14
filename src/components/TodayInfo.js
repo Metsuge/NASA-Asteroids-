@@ -2,16 +2,15 @@ import "./styles/today.css";
 import React, {useEffect} from "react";
 import LastApproach from "./LastApproach";
 import NextApproach from "./NextApproach";
+import {liveClock, getFormattedDate} from "../sharedFunctions/sharedFunctions.js";
 
 function TodayInfo({date, objects}) {
   let CurrentTime = Date.now();
   let pastApproaches = [];
   let nextApproachList = [];
   let nextApproach, lastApproach;
-  let clock = document.getElementById("clock");
-
   if (objects[0]) {
-    //sort todays approaches by date from earliest to lastest
+    //sort given array of approaches by time from earliest to latest
     const sorted = Array.from(objects).sort(
       (x, y) =>
         x.close_approach_data[0].epoch_date_close_approach -
@@ -29,63 +28,52 @@ function TodayInfo({date, objects}) {
     }
   }
 
-  function getFormattedDate(date) {
-    let d = date;
-
-    d =
-      d.getFullYear() +
-      "-" +
-      ("0" + (d.getMonth() + 1)).slice(-2) +
-      "-" +
-      ("0" + d.getDate()).slice(-2) +
-      " " +
-      ("0" + d.getHours()).slice(-2) +
-      ":" +
-      ("0" + d.getMinutes()).slice(-2);
-    // ":" +
-    // ("0" + d.getSeconds()).slice(-2);
-    return d;
-  }
-
   if (nextApproachList[0] && pastApproaches[pastApproaches.length - 1]) {
-    nextApproach = getFormattedDate(
-      new Date(nextApproachList[0].close_approach_data[0].epoch_date_close_approach)
-    );
-    lastApproach = getFormattedDate(
-      new Date(
-        pastApproaches[pastApproaches.length - 1].close_approach_data[0].epoch_date_close_approach
-      )
-    );
+    nextApproach = [
+      {
+        date: getFormattedDate(
+          new Date(nextApproachList[0].close_approach_data[0].epoch_date_close_approach)
+        ),
+        miss_distance: nextApproachList[0].close_approach_data[0].miss_distance.kilometers,
+        relative_velocity:
+          nextApproachList[0].close_approach_data[0].relative_velocity.kilometers_per_hour,
+
+        isHazardous: nextApproachList[0].is_potentially_hazardous_asteroid,
+        name: nextApproachList[0].name,
+        orbiting_body: nextApproachList[0].close_approach_data[0].orbiting_body,
+      },
+    ];
+
+    lastApproach = [
+      {
+        date: getFormattedDate(
+          new Date(
+            pastApproaches[
+              pastApproaches.length - 1
+            ].close_approach_data[0].epoch_date_close_approach
+          )
+        ),
+        miss_distance:
+          pastApproaches[pastApproaches.length - 1].close_approach_data[0].miss_distance.kilometers,
+        relative_velocity:
+          pastApproaches[pastApproaches.length - 1].close_approach_data[0].relative_velocity
+            .kilometers_per_hour,
+        isHazardous: pastApproaches[pastApproaches.length - 1].is_potentially_hazardous_asteroid,
+        name: pastApproaches[pastApproaches.length - 1].name,
+        orbiting_body:
+          pastApproaches[pastApproaches.length - 1].close_approach_data[0].orbiting_body,
+      },
+    ];
   }
 
-  function time() {
-    var d = new Date();
-    let y = d.getFullYear() + "-";
-    let month = ("0" + (d.getMonth() + 1)).slice(-2) + "-";
-    let day = ("0" + d.getDate()).slice(-2);
-    var s = d.getSeconds();
-    var m = d.getMinutes();
-    var h = d.getHours();
-    if (clock) {
-      clock.textContent =
-        y +
-        month +
-        day +
-        " " +
-        ("0" + h).substr(-2) +
-        ":" +
-        ("0" + m).substr(-2) +
-        ":" +
-        ("0" + s).substr(-2);
-    }
-  }
-
-  setInterval(time, 1000);
+  setInterval(function () {
+    liveClock("clock");
+  }, 1000);
 
   return (
     <div id="today-main-div">
       <div id="today-text">
-        TODAY {}
+        TODAY
         <div id="clock"></div>
       </div>
       <LastApproach lastApproach={lastApproach}></LastApproach>

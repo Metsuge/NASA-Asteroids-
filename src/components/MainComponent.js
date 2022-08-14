@@ -7,25 +7,48 @@ import {useEffect} from "react";
 import store from "../redux/store";
 import {useSelector, useDispatch} from "react-redux";
 import * as actions from "../redux/fetchAPIData/actions";
+import {subtractDays, getYear, addDays} from "../sharedFunctions/sharedFunctions.js";
 
-function MainComponent(props) {
+function MainComponent() {
+  let option = "today";
+  let dates = {
+    startDate: "",
+    endDate: "",
+  };
   const dispatch = useDispatch();
+  const getStartEndDates = function () {
+    switch (option) {
+      case "today":
+        return (dates = {
+          startDate: subtractDays(new Date(), 1),
+          endDate: addDays(new Date(), 1),
+        });
+
+      case "tomorrow":
+        return getYear(new Date());
+
+      default:
+        return;
+    }
+  };
+  getStartEndDates();
 
   const logCurrentStore = function () {
     const latestStore = store.getState();
     // console.log("latestStore", latestStore);
   };
-  let dates = {
-    startDate: "2022-08-12",
-    endDate: "2022-08-13",
-  };
 
   const selectData = (state) => state.APIreducer;
-  const {near_earth_objects, APIData, end_date, start_date, end_date_objects, start_date_objects} =
-    useSelector(selectData);
-
+  const {
+    near_earth_objects,
+    APIData,
+    prevCurrentNextDayCombined,
+    end_date,
+    start_date,
+    end_date_objects,
+    start_date_objects,
+  } = useSelector(selectData);
   const fetchData = () => {
-    dispatch(actions.setStartEndDates(dates));
     dispatch(actions.fetchAPIRequest());
 
     (async () => {
@@ -42,37 +65,25 @@ function MainComponent(props) {
   };
 
   useEffect(() => {
+    dispatch(actions.setStartEndDates(dates));
     fetchData();
     store.subscribe(logCurrentStore);
   }, []);
 
-  // console.log("CurrentTime", CurrentTime);
-
   useEffect(() => {
-    // sort out the api in separate objects in the store
-    // if (APIData && start_date_objects[0]) {
-    //   const sorted = Array.from(start_date_objects).sort(
-    //     (x, y) =>
-    //       x.close_approach_data[0].close_approach_date_full -
-    //       y.close_approach_data[0].close_approach_date_full
-    //   );
-    //   let nextApproachList = [];
-    //   for (let i = 0; i < sorted.length; i++) {
-    //     if (sorted[i].close_approach_data[0].epoch_date_close_approach < CurrentTime) {
-    //     } else {
-    //       nextApproachList.push(sorted[i]);
-    //     }
-    //   }
-    //   // first object in the list of next approach
-    //   let nextApproach = new Date(
-    //     nextApproachList[0].close_approach_data[0].epoch_date_close_approach
-    //   );
-    // }
+    let combinedArray = [];
+    if (APIData.near_earth_objects) {
+      let availableDates = Object.keys(APIData.near_earth_objects);
+      for (let i = 0; i < availableDates.length; i++) {
+        combinedArray.push(...APIData.near_earth_objects[availableDates[i]]);
+      }
+    }
+    dispatch(actions.combineObjectArrays(combinedArray));
+    store.subscribe(logCurrentStore);
   }, [APIData]);
-
   return (
     <div id="main-component-div">
-      <TodayInfo date={dates.startDate} objects={start_date_objects}></TodayInfo>
+      <TodayInfo date={dates.startDate} objects={prevCurrentNextDayCombined}></TodayInfo>
     </div>
   );
 }

@@ -9,6 +9,7 @@ const initialAPIState = {
   end_date: "",
   start_date_objects: "",
   end_date_objects: "",
+  prevCurrentNextDayCombined: [],
 };
 
 export const APIreducer = (state = initialAPIState, action) => {
@@ -28,6 +29,12 @@ export const APIreducer = (state = initialAPIState, action) => {
         start_date_objects: action.payload.near_earth_objects[state.start_date],
         end_date_objects: action.payload.near_earth_objects[state.end_date],
         error: "",
+      };
+
+    case actionTypes.COMBINE_OBJECT_ARRAYS:
+      return {
+        ...state,
+        prevCurrentNextDayCombined: action.payload,
       };
 
     case actionTypes.FETCH_API_FAILURE:
