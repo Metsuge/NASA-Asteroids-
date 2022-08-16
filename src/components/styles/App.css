@@ -3,9 +3,65 @@
 }
 #main-app-div{
   /* position: absolute; */
-  width:600px;
+  width:100%;
   height: 600px;
   border:2px solid rgb(34, 217, 220);
   border-radius:8px;
   margin: 0 auto;
+  background-image: url('../../adssets/space.jpg');
+  background-size: contain;
+}
+
+#stardust{
+  width: 400px;
+  height: 407px;
+  background-image: url('../../adssets/stardust.png');
+  background-size: contain;
+  position: absolute;
+  top: -20%;
+  z-index: 2;
+  left: -10%;
+  background-repeat: no-repeat;
+  opacity: 0.39;
+}
+
+#stars{
+  width: 100%;
+  height: 100%;
+  background-image: url('../../adssets/stars.png');
+  background-size: contain;
+  position: absolute;
+  top: 0px;
+  z-index: 2;
+  left: 0px;
+  background-repeat: no-repeat;
+  animation: stars 25s ;
+  animation-fill-mode: forwards;
+  /* animation-timing-function: ease-in-out; */ 
+  border: 1px solid red;
+}
+
+/* #one-star{ */
+  /* position: absolute;
+  top: 200px;
+width:px;
+height: 1px;
+border: 1px solid #fff;
+background-color: #fff; */
+/* } */
+
+
+@keyframes stars {
+  from {
+    /* width:100px;
+    height: 100px; */
+    background-size: 150px 100px;
+  }
+  to {
+    /* width:600px;
+    height:600px; */
+    /* top:0;
+    left:0; */
+    background-size: 3550px 2250px;
+  }
 }

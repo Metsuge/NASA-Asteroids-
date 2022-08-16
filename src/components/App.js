@@ -10,6 +10,10 @@ function App() {
       <div id="main-app-div">
         <MainComponent></MainComponent>
       </div>
+      <div id="stardust"></div>
+      <div id="stars">
+        <div id="one-star"></div>
+      </div>
     </Provider>
   );
 }
