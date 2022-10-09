@@ -113,7 +113,6 @@ function MainComponent() {
         topsArray.push(topValue);
       }
     }
-    console.log(topsArray);
     // for (let i = 0; i < start_date_objects.length; i++) {
     //   if (document.getElementById(`asteroid-${i}`)) {
     //     let asteroid = document.getElementById(`asteroid-${i}`);
@@ -122,6 +121,18 @@ function MainComponent() {
     //   }
     // }
   };
+
+  let divideArea = function(width, height){
+    // let squareLimits: [];
+    // leave 50 px on each side free = (width - 100) and (height - 100)
+    let widthOfSquare = Math.floor((width - 100) / start_date_objects.length );
+    let heightOfSquare = Math.floor((height - 100) / start_date_objects.length );
+    console.log('width of the square',widthOfSquare );
+    console.log('height of the square', heightOfSquare);
+    // I know the measurements of the squeare
+  };
+
+  divideArea(document.getElementById('main-app-div').offsetWidth, document.getElementById('main-app-div').offsetHeight)
 
   //main asteroid has random top % and random left %
   // fucking avoid collitions:
