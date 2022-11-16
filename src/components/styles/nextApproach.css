@@ -1,4 +1,10 @@
 #nextAprroach-main-div{
+    width:300px;
+    height: 200px;
+}
+
+
+#text-div{
     top: 45%;
     width: 280px;
     color:#000;
@@ -13,4 +19,5 @@
     position: absolute;
     opacity: 0.8;
     padding: 7px;
+    border-radius: 15px;
 }

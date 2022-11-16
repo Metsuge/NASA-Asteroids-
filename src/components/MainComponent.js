@@ -154,6 +154,10 @@ function MainComponent() {
 	// top: from 10% to 90%, left: from 10% to 90%;
 	return (
 		<div id="main-component-div">
+			<p>
+				Near-Earth objects are asteroids and comets with orbits that bring them to within 120 million miles (195 million
+				kilometers) of the Sun, which means they can circulate through the Earth’s orbit.
+			</p>
 			{/* <div>{renderAsteroids()}</div> */}
 			{prevCurrentNextDayCombined.length > 0 ? (
 				<TodayInfo date={dates.startDate} objects={prevCurrentNextDayCombined}></TodayInfo>

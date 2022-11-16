@@ -8,6 +8,12 @@
     align-items: center;
 }
 
+#main-component-div p{
+  color:#fff;
+  width:50%;
+  margin: 54px;
+}
+
 #earth-animation{
   position: absolute;
   top: 20%;
