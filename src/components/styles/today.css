@@ -3,7 +3,7 @@
     top:50px;
     width:300px;
     height: 500px;
-    border:2px solid rgb(34, 220, 112);
+    /* border:2px solid rgb(34, 220, 112); */
     border-radius:8px;
     padding: 10px;
 }
@@ -14,4 +14,17 @@
     color: rgb(247, 255, 251);
     font-size: 30px;
     text-align: center;
+}
+
+#loader{
+    width:100%;
+    height: 100%;
+    
+}
+
+#loader-div{
+    width:100px;
+    height: 100px;
+    color: #fff;
+    margin: 0 auto;
 }

@@ -1,6 +1,16 @@
 #nextAprroach-main-div{
     top: 45%;
-    width: inherit;
-    color:#fff;
-
+    width: 280px;
+    color:#000;
+    height:auto;
+    
+}
+#background-image{
+    background-image: url('../../adssets/glass-background.webp');
+    top: 45%;
+    width: 283px;
+    height: 130px;
+    position: absolute;
+    opacity: 0.8;
+    padding: 7px;
 }
