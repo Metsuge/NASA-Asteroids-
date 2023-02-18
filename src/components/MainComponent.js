@@ -38,7 +38,6 @@ function MainComponent() {
 		}
 	};
 	getStartEndDates();
-
 	const logCurrentStore = function () {
 		const latestStore = store.getState();
 		// console.log("latestStore", latestStore);
@@ -61,7 +60,7 @@ function MainComponent() {
 
 		(async () => {
 			let data;
-			if (!isLocal) {
+			if (isLocal) {
 				try {
 					data = await fetch(
 						`https://api.nasa.gov/neo/rest/v1/feed?start_date=${dates.startDate}&end_date=${dates.endDate}&api_key=MtBjEJEcIVyoShaeySbwXWtKtziVaFlFRMl31i0z`
@@ -69,6 +68,7 @@ function MainComponent() {
 
 					const json = await data.json();
 					dispatch(actions.fetchAPISuccess(json));
+					console.log(json);
 				} catch (error) {
 					console.log(error.message);
 					actions.fetchAPIFailure(error.message);
@@ -96,7 +96,7 @@ function MainComponent() {
 		}
 		dispatch(actions.combineObjectArrays(combinedArray));
 		store.subscribe(logCurrentStore);
-		asteroidCoords();
+		// asteroidCoords();
 	}, [APIData]);
 
 	//get random number for

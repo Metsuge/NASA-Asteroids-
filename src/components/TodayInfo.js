@@ -24,6 +24,7 @@ function TodayInfo({ date, objects }) {
 				nextApproachList.push(sorted[i]);
 			}
 		}
+		console.log(sorted);
 	}
 	if (nextApproachList[0] && pastApproaches[pastApproaches.length - 1]) {
 		nextApproach = [
@@ -37,7 +38,7 @@ function TodayInfo({ date, objects }) {
 				orbiting_body: nextApproachList[0].close_approach_data[0].orbiting_body,
 			},
 		];
-
+		console.log("nextApproach", nextApproach);
 		lastApproach = [
 			{
 				date: getFormattedDate(
